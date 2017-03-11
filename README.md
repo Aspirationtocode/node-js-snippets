@@ -1,6 +1,6 @@
 # node-js-snippets
 
-EventEmitter example:
+### EventEmitter example:
 ```javascript
 const EventEmitter = require('events').EventEmitter;
 
@@ -34,4 +34,24 @@ person2.walk();
 // => Alex начал прогулку...
 // => Evgeny закончил гулять спустя 2 cекунды.
 // => Alex закончил гулять спустя 5 cекунды.
+```
+
+### Reading directories and files example:
+```javascript
+const fs = require('fs');
+
+function showFilesContentInDir(dirName, symbol) {
+  let repeat = 0;
+  const options = {encoding: 'utf-8'};
+  fs.readdir(dirName, options, (err, files) => {
+    files.forEach((file) => {
+      const filePath = `${__dirname}/text-files/${file}`;
+      fs.readFile(filePath, options, (err, data) => {
+        console.log(data)
+      });
+    })
+  })
+}
+
+showFilesContentInDir('./text-files');
 ```

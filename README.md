@@ -55,3 +55,28 @@ function showFilesContentInDir(dirName, symbol) {
 
 showFilesContentInDir('./text-files');
 ```
+
+### Recursive reading directory
+```javascript
+const fs = require('fs');
+
+const base = './text-files';
+
+function readDir(base) {
+  fs.readdir(base, (err, files) => {
+    files.forEach((fileName) => {
+      const newPath = `${base}/${fileName}`;
+      fs.stat(newPath, (err, state) => {
+        if (state.isDirectory()) {
+          localBase = newPath;
+          readDir(localBase);
+        } else {
+          console.log(fileName);
+        }
+      })
+    })
+  })
+}
+
+readDir(base);
+```
